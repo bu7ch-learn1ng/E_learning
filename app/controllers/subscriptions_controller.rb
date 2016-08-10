@@ -21,8 +21,8 @@ class SubscriptionsController < ApplicationController
 	def delete
 		user = current_user
 		customer = Stripe::Customer.retrieve(user.stripeid)
-		subscription_id = customer.scubscritions.first.id
-		subscribtion = customer.subscribtion.retrieve(subscribtion_id).delete
+		subscription_id = customer.scubscriptions.first.id
+		subscription = customer.subscriptions.retrieve(subscription_id).delete
 		user.subscribed = "basic"
 		user.save
 		render json: user 

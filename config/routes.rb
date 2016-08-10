@@ -8,9 +8,9 @@ end
 resources :schools
 
 	#Subscribtions
-	post	 "/sublscriptions" => "sublscriptions#create"
-	put		 "/sublscriptions" => "Subscribtions#update"
-	delete "/sublscriptions" => "sublscriptions#delete"
+	post	 "/subscriptions" => "subscriptions#create"
+	put		 "/subscriptions" => "subscriptions#update"
+	delete "/subscriptions" => "subscriptions#delete"
 
 	#Progresses
 	get 		"chapters/read" 								=> "progresses#show"
