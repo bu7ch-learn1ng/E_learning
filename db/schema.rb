@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809113309) do
+ActiveRecord::Schema.define(version: 20160810155640) do
 
   create_table "authentication_tokens", force: :cascade do |t|
     t.string   "body"
@@ -23,12 +23,32 @@ ActiveRecord::Schema.define(version: 20160809113309) do
     t.index ["user_id"], name: "index_authentication_tokens_on_user_id"
   end
 
+  create_table "chapters", force: :cascade do |t|
+    t.integer  "course_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "video_url"
+    t.boolean  "completed",   default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["created_at"], name: "index_chapters_on_created_at"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "thumbnail"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "progresses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "chapter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id"], name: "index_progresses_on_chapter_id"
+    t.index ["user_id"], name: "index_progresses_on_user_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -54,6 +74,8 @@ ActiveRecord::Schema.define(version: 20160809113309) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                                                                                       null: false
     t.datetime "updated_at",                                                                                                       null: false
+    t.string   "subscribed",             default: "basic"
+    t.string   "stripeid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
